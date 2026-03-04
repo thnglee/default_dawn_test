@@ -1,0 +1,395 @@
+{
+  "social-proof-stats": {
+    "final_score": 0.8,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [
+      {
+        "rule": "DC-04",
+        "description": "Section is a visible content section but does not expose a color_scheme setting or apply Dawn's color scheme class pattern.",
+        "location": "schema settings + root div class attribute",
+        "severity": "warning",
+        "auto_fixed": true,
+        "fix_applied": "Added color_scheme setting (type: color_scheme, id: color_scheme, default: scheme-1) under a new 'Theme settings' header. Added 'color-{{ section.settings.color_scheme }} gradient' classes to the root div element."
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema header content 'App Setup' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, first header",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'Show placeholder in Theme Editor' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, placeholder_visible checkbox",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'Section label' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, placeholder_label text",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'Setup instructions' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, merchant_instruction textarea",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'App Store URL' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, app_store_url url",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema header content 'Spacing' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, Spacing header",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema info string 'Disable this after you have installed and configured the app...' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, placeholder_visible info",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema info string 'Displayed only when the placeholder is visible.' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, placeholder_label info",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema info string 'Optional link to the app's Shopify App Store listing.' is a hardcoded English string, not a t: locale key.",
+        "location": "schema settings, app_store_url info",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      }
+    ],
+    "unresolvable_flags": [
+      {
+        "rule": "DC-13",
+        "description": "Nine schema label, content, and info fields use hardcoded English strings instead of t: locale keys. These are custom app-placeholder settings with no corresponding Dawn locale keys.",
+        "manual_action": "Create new locale entries in locales/en.default.schema.json under a 'sections.app_placeholder' namespace for: 'App Setup' (header), 'Show placeholder in Theme Editor' (label), 'Disable this after you have installed...' (info), 'Section label' (label), 'Displayed only when the placeholder is visible.' (info), 'Setup instructions' (label), 'App Store URL' (label), 'Optional link to the app's...' (info), 'Spacing' (header). Then replace each hardcoded string with its corresponding t: key."
+      }
+    ]
+  },
+  "inline-testimonial": {
+    "final_score": 0.85,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [
+      {
+        "rule": "DC-04",
+        "description": "Section has visible content but does not expose a color_scheme setting or apply Dawn's color scheme class pattern.",
+        "location": "schema settings + root div class attribute",
+        "severity": "warning",
+        "auto_fixed": true,
+        "fix_applied": "Added color_scheme setting (type: color_scheme, default: scheme-1) to schema. Added 'color-{{ section.settings.color_scheme }} gradient' classes to the root div element."
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema header 'App Setup' uses hardcoded English string instead of a t: translation key.",
+        "location": "schema settings — first header, content: 'App Setup'",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'Show placeholder in Theme Editor' uses hardcoded English string instead of a t: translation key.",
+        "location": "schema settings — placeholder_visible label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'Section label' uses hardcoded English string instead of a t: translation key.",
+        "location": "schema settings — placeholder_label label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'Setup instructions' uses hardcoded English string instead of a t: translation key.",
+        "location": "schema settings — merchant_instruction label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label 'App Store URL' uses hardcoded English string instead of a t: translation key.",
+        "location": "schema settings — app_store_url label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema header 'Spacing' uses hardcoded English string instead of a t: translation key.",
+        "location": "schema settings — second header, content: 'Spacing'",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      }
+    ],
+    "unresolvable_flags": [
+      {
+        "rule": "DC-13",
+        "description": "Six schema labels/headers use hardcoded English strings: 'App Setup', 'Show placeholder in Theme Editor', 'Section label', 'Setup instructions', 'App Store URL', 'Spacing'. These are custom to this app-placeholder section type and have no existing Dawn t: key equivalents.",
+        "manual_action": "Create new translation keys in locales/en.default.schema.json under a namespace such as 't:sections.app_placeholder.*' for each of these labels, then replace the hardcoded strings in the schema with the new t: keys."
+      }
+    ]
+  },
+  "expert-advice": {
+    "final_score": 0.75,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [
+      {
+        "rule": "DC-04",
+        "description": "Section renders visible content but does not expose a color_scheme setting, relying on implicit/inherited background rather than Dawn's explicit color scheme pattern.",
+        "location": "schema settings + root div class attribute",
+        "severity": "warning",
+        "auto_fixed": true,
+        "fix_applied": "Added color_scheme setting (type: color_scheme, id: color_scheme, default: scheme-1) to schema under a new 'Color' header. Added 'color-{{ section.settings.color_scheme }} gradient' classes to the root placeholder div."
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema header 'App Setup' uses a hardcoded English string instead of a t: locale key.",
+        "location": "schema settings — first header, content: 'App Setup'",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema setting label 'Show placeholder in Theme Editor' (id: placeholder_visible) uses a hardcoded English string instead of a t: locale key.",
+        "location": "schema settings — id: placeholder_visible, label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema setting label 'Section label' (id: placeholder_label) uses a hardcoded English string instead of a t: locale key.",
+        "location": "schema settings — id: placeholder_label, label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema setting label 'Setup instructions' (id: merchant_instruction) uses a hardcoded English string instead of a t: locale key.",
+        "location": "schema settings — id: merchant_instruction, label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema setting label 'App Store URL' (id: app_store_url) uses a hardcoded English string instead of a t: locale key.",
+        "location": "schema settings — id: app_store_url, label",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      }
+    ],
+    "unresolvable_flags": [
+      {
+        "rule": "DC-13",
+        "description": "Five schema labels and one schema header use hardcoded English strings: 'App Setup', 'Show placeholder in Theme Editor', 'Section label', 'Setup instructions', 'App Store URL'. These are custom app-placeholder labels with no existing Dawn locale keys.",
+        "manual_action": "Create new translation keys in locales/en.default.schema.json under a namespace such as 'sections.app_placeholder' (e.g. 't:sections.app_placeholder.header_app_setup', 't:sections.app_placeholder.placeholder_visible_label', etc.) and update the schema labels to reference them."
+      }
+    ]
+  },
+  "faq-accordion": {
+    "final_score": 0.93,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [
+      {
+        "rule": "DC-13",
+        "description": "Schema label for 'subheading' setting uses hardcoded English string \"Subheading\" instead of a t: translation key.",
+        "location": "schema settings — id: subheading",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label for block setting 'question' uses hardcoded English string \"Question\" instead of a t: translation key.",
+        "location": "schema blocks[faq_item].settings — id: question",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label for block setting 'answer' uses hardcoded English string \"Answer\" instead of a t: translation key.",
+        "location": "schema blocks[faq_item].settings — id: answer",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      }
+    ],
+    "unresolvable_flags": [
+      {
+        "rule": "DC-13",
+        "description": "Schema labels for 'Subheading', 'Question', and 'Answer' are hardcoded English strings. No standard Dawn t: locale keys exist for these custom labels.",
+        "manual_action": "Add translation keys to locales/en.default.schema.json (e.g. t:sections.faq-accordion.blocks.faq_item.settings.question.label, etc.) and update the schema labels to reference them."
+      }
+    ]
+  },
+  "as-seen-in": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
+  },
+  "symptoms-explainer": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
+  },
+  "product-hero": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": [
+      {
+        "rule": "DC-01",
+        "description": "The input liquid_content is an empty string. There is no section file to audit or patch.",
+        "manual_action": "Provide the actual .liquid section content for the 'product-hero' section so compliance checks can be performed. If the Section Conversion Agent failed to produce output, re-run that stage first."
+      }
+    ]
+  },
+  "why-nothing-worked": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
+  },
+  "symptom-cause-table": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
+  },
+  "drainage-system-explainer": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
+  },
+  "synergistic-effect": {
+    "final_score": 0.87,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [
+      {
+        "rule": "DC-13",
+        "description": "Schema label for 'subheading' setting uses hardcoded English string \"Subheading\" instead of a t: translation key.",
+        "location": "schema settings, id: subheading",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label for 'callout_text' setting uses hardcoded English string \"Callout box text\" instead of a t: translation key.",
+        "location": "schema settings, id: callout_text",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label for 'restoration_text' setting uses hardcoded English string \"Bottom statement\" instead of a t: translation key.",
+        "location": "schema settings, id: restoration_text",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label for block setting 'custom_icon' uses hardcoded English string \"Custom icon\" instead of a t: translation key. Info field also hardcoded.",
+        "location": "schema blocks[benefit_item].settings, id: custom_icon",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      },
+      {
+        "rule": "DC-13",
+        "description": "Schema label for block setting 'text' uses hardcoded English string \"Benefit text\" instead of a t: translation key.",
+        "location": "schema blocks[benefit_item].settings, id: text",
+        "severity": "warning",
+        "auto_fixed": false,
+        "fix_applied": null
+      }
+    ],
+    "unresolvable_flags": [
+      {
+        "rule": "DC-13",
+        "description": "Five schema setting labels use hardcoded English strings: 'Subheading' (id: subheading), 'Callout box text' (id: callout_text), 'Bottom statement' (id: restoration_text), 'Custom icon' (id: custom_icon), 'Benefit text' (id: text). These are custom settings with no known existing Dawn locale key.",
+        "manual_action": "Add corresponding translation keys to locales/en.default.schema.json (e.g. under t:sections.synergistic-effect.*) and update these labels to reference the new t: keys."
+      }
+    ]
+  },
+  "trust-badges-bar": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
+  },
+  "ingredients-system": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
+  },
+  "reviews-section": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": [
+      {
+        "rule": "DC-01",
+        "description": "The input liquid_content is an empty string. There is no section code to validate or patch.",
+        "manual_action": "Provide the actual .liquid section file content for the 'reviews-section' section. This agent cannot generate a section from scratch — it can only patch and validate existing section code. Escalate back to the Section Conversion Agent to produce the initial draft."
+      }
+    ]
+  }
+}

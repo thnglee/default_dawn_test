@@ -1,0 +1,434 @@
+{
+  "_meta": {
+    "version": "1.3",
+    "last_updated": "2025-08-01",
+    "description": "Shopify third-party app fingerprint database. Used by App Detection Agent for deterministic classification before LLM fallback.",
+    "usage": "Match any entry in 'classes', 'data_attributes', 'ids', or 'iframe_src_patterns' against the section DOM snippet. First match wins.",
+    "update_trigger": "When an app updates its DOM class names, or when a new commonly-encountered app is discovered."
+  },
+
+  "reviews": {
+    "judge_me": {
+      "app_name": "Judge.me Product Reviews",
+      "app_slug": "judge-me",
+      "placeholder_type": "reviews",
+      "app_store_url": "https://apps.shopify.com/judgeme",
+      "merchant_instruction": "Install Judge.me from the Shopify App Store. Go to Apps > Judge.me > Widgets, create a Reviews Widget and copy the embed code into a Custom Liquid block inside this section.",
+      "confidence_base": 0.99,
+      "classes": ["jdgm-widget", "jdgm-review-widget", "jdgm-review-badge", "jdgm--done-setup", "jdgm-carousel"],
+      "data_attributes": ["data-id", "data-product-title"],
+      "ids": ["jdgm-widget"],
+      "scripts": ["judge.me/shopify/install.js"],
+      "iframe_src_patterns": []
+    },
+    "okendo": {
+      "app_name": "Okendo Reviews & UGC",
+      "app_slug": "okendo",
+      "placeholder_type": "reviews",
+      "app_store_url": "https://apps.shopify.com/okendo",
+      "merchant_instruction": "Install Okendo from the Shopify App Store. Use the Okendo theme app extension to embed the reviews widget in this section.",
+      "confidence_base": 0.99,
+      "classes": ["okeReviews", "oke-w", "oke-sr", "oke-reviews"],
+      "data_attributes": ["data-oke-widget", "data-oke-reviews-product-id"],
+      "ids": [],
+      "scripts": ["okendo.io"],
+      "iframe_src_patterns": []
+    },
+    "yotpo": {
+      "app_name": "Yotpo Product Reviews",
+      "app_slug": "yotpo",
+      "placeholder_type": "reviews",
+      "app_store_url": "https://apps.shopify.com/yotpo-social-reviews",
+      "merchant_instruction": "Install Yotpo from the Shopify App Store. Use the Yotpo theme integration to add the Reviews widget to this section.",
+      "confidence_base": 0.99,
+      "classes": ["yotpo", "yotpo-main-widget", "yotpo-reviews-carousel", "yotpo-widget-instance"],
+      "data_attributes": ["data-product-id", "data-yotpo-instance-id"],
+      "ids": ["yotpo-testimonials-custom-tab"],
+      "scripts": ["staticw2.yotpo.com"],
+      "iframe_src_patterns": []
+    },
+    "loox": {
+      "app_name": "Loox Product Reviews & Photos",
+      "app_slug": "loox",
+      "placeholder_type": "reviews",
+      "app_store_url": "https://apps.shopify.com/loox",
+      "merchant_instruction": "Install Loox from the Shopify App Store. Use the Loox Widget Builder to create a reviews widget and embed it in this section.",
+      "confidence_base": 0.99,
+      "classes": ["loox-rating", "loox-widget-container", "loox-rating-widget"],
+      "data_attributes": ["data-loox-aggregate"],
+      "ids": ["loox_new_reviews_section"],
+      "scripts": ["loox.io"],
+      "iframe_src_patterns": []
+    },
+    "stamped": {
+      "app_name": "Stamped Product Reviews & UGC",
+      "app_slug": "stamped",
+      "placeholder_type": "reviews",
+      "app_store_url": "https://apps.shopify.com/product-reviews-addon",
+      "merchant_instruction": "Install Stamped.io from the Shopify App Store. Use the Stamped Widget Configurator to embed the reviews section.",
+      "confidence_base": 0.99,
+      "classes": ["stamped-main-widget", "stamped-reviews-widget", "stamped-container"],
+      "data_attributes": ["data-widget-type", "data-product-sku"],
+      "ids": ["stamped-main-widget"],
+      "scripts": ["stamped.io"],
+      "iframe_src_patterns": []
+    },
+    "shopify_native": {
+      "app_name": "Shopify Product Reviews (Native)",
+      "app_slug": "shopify-product-reviews",
+      "placeholder_type": "reviews",
+      "app_store_url": "https://apps.shopify.com/product-reviews",
+      "merchant_instruction": "Install the official Shopify Product Reviews app. Once installed, the reviews section will render automatically.",
+      "confidence_base": 0.95,
+      "classes": ["spr-container", "spr-review", "spr-form", "spr-summary"],
+      "data_attributes": ["data-product-id"],
+      "ids": ["shopify-product-reviews"],
+      "scripts": [],
+      "iframe_src_patterns": []
+    },
+    "rivyo": {
+      "app_name": "Rivyo Product Reviews",
+      "app_slug": "rivyo",
+      "placeholder_type": "reviews",
+      "app_store_url": "https://apps.shopify.com/rivyo-product-review",
+      "merchant_instruction": "Install Rivyo from the Shopify App Store. Use the Rivyo widget embed settings to add reviews to this section.",
+      "confidence_base": 0.97,
+      "classes": ["rivyo_main_widget", "rivyo-review-widget"],
+      "data_attributes": ["data-rivyo-product"],
+      "ids": [],
+      "scripts": ["rivyo.com"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "bundles": {
+    "rebuy": {
+      "app_name": "Rebuy Personalization Engine",
+      "app_slug": "rebuy",
+      "placeholder_type": "bundle",
+      "app_store_url": "https://apps.shopify.com/rebuy-engine",
+      "merchant_instruction": "Install Rebuy Engine from the Shopify App Store. Create a Smart Cart or Recommendations widget in the Rebuy dashboard and embed it in this section using the Custom Widget embed method.",
+      "confidence_base": 0.99,
+      "classes": ["rebuy-widget", "rebuy-product-add-ons", "rebuy-smart-cart", "rebuy-recommendations"],
+      "data_attributes": ["data-rebuy-id", "data-rebuy-source"],
+      "ids": [],
+      "scripts": ["rebuyengine.com"],
+      "iframe_src_patterns": []
+    },
+    "bundler": {
+      "app_name": "Bundler — Product Bundles",
+      "app_slug": "bundler",
+      "placeholder_type": "bundle",
+      "app_store_url": "https://apps.shopify.com/bundler-product-bundles",
+      "merchant_instruction": "Install Bundler from the Shopify App Store. Create a bundle in Bundler's dashboard and use the embed code to display it in this section.",
+      "confidence_base": 0.97,
+      "classes": ["bundler-widget", "bundler-product-widget", "bundler__container"],
+      "data_attributes": ["data-bundler-id"],
+      "ids": [],
+      "scripts": ["bundler.app"],
+      "iframe_src_patterns": []
+    },
+    "bold_bundles": {
+      "app_name": "Bold Product Bundles",
+      "app_slug": "bold-bundles",
+      "placeholder_type": "bundle",
+      "app_store_url": "https://apps.shopify.com/product-bundles",
+      "merchant_instruction": "Install Bold Product Bundles from the Shopify App Store. Configure the bundle widget in Bold's dashboard and place the embed in this section.",
+      "confidence_base": 0.97,
+      "classes": ["bold_bundle", "bold-bundles__container", "BOLD-bundle-product"],
+      "data_attributes": ["data-bold-bundle"],
+      "ids": [],
+      "scripts": ["boldcommerce.com"],
+      "iframe_src_patterns": []
+    },
+    "frequently_bought": {
+      "app_name": "Frequently Bought Together",
+      "app_slug": "frequently-bought-together",
+      "placeholder_type": "bundle",
+      "app_store_url": "https://apps.shopify.com/frequently-bought-together",
+      "merchant_instruction": "Install Frequently Bought Together from the Shopify App Store. The bundle will appear automatically below the product page once installed.",
+      "confidence_base": 0.97,
+      "classes": ["fbt-section", "fbt-container", "fbt-product"],
+      "data_attributes": ["data-fbt-product-id"],
+      "ids": ["frequently-bought-together"],
+      "scripts": [],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "upsells": {
+    "zipify_ocuapp": {
+      "app_name": "One Click Upsell — Zipify OCU",
+      "app_slug": "zipify-ocu",
+      "placeholder_type": "upsell",
+      "app_store_url": "https://apps.shopify.com/one-click-upsell-zipify",
+      "merchant_instruction": "Install Zipify OCU from the Shopify App Store. Configure your upsell funnels inside the app. This section will be populated post-purchase.",
+      "confidence_base": 0.97,
+      "classes": ["zipify-ocu", "ocu-upsell-widget"],
+      "data_attributes": ["data-ocu-handle"],
+      "ids": [],
+      "scripts": ["zipify.com"],
+      "iframe_src_patterns": ["zipify.com"]
+    },
+    "reconvert": {
+      "app_name": "ReConvert Upsell & Cross-sell",
+      "app_slug": "reconvert",
+      "placeholder_type": "upsell",
+      "app_store_url": "https://apps.shopify.com/reconvert-upsell-cross-sell",
+      "merchant_instruction": "Install ReConvert from the Shopify App Store. Set up your upsell flows inside the ReConvert dashboard.",
+      "confidence_base": 0.97,
+      "classes": ["reconvert-widget", "rc-widget"],
+      "data_attributes": ["data-reconvert"],
+      "ids": [],
+      "scripts": ["reconvert.com"],
+      "iframe_src_patterns": ["reconvert.com"]
+    },
+    "candy_rack": {
+      "app_name": "Candy Rack — Upsell & Cross-Sell",
+      "app_slug": "candy-rack",
+      "placeholder_type": "upsell",
+      "app_store_url": "https://apps.shopify.com/candy-rack",
+      "merchant_instruction": "Install Candy Rack from the Shopify App Store. Configure your upsell offers in the Candy Rack dashboard.",
+      "confidence_base": 0.95,
+      "classes": ["candy-rack", "candy-rack__offer"],
+      "data_attributes": ["data-candy-rack"],
+      "ids": [],
+      "scripts": ["candyrack.app"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "loyalty": {
+    "smile": {
+      "app_name": "Smile: Loyalty & Rewards",
+      "app_slug": "smile-io",
+      "placeholder_type": "loyalty",
+      "app_store_url": "https://apps.shopify.com/smile-io",
+      "merchant_instruction": "Install Smile.io from the Shopify App Store. Embed the Smile loyalty widget in this section using the Smile on-site nudge configurator.",
+      "confidence_base": 0.99,
+      "classes": ["smile-ui-launcher", "smile-launcher-wrapper", "smile-dynamic-panel"],
+      "data_attributes": ["data-smile-ui"],
+      "ids": ["smile-ui-container"],
+      "scripts": ["smile.io", "cdn.sweettooth.io"],
+      "iframe_src_patterns": []
+    },
+    "growave": {
+      "app_name": "Growave: Loyalty & Wishlist",
+      "app_slug": "growave",
+      "placeholder_type": "loyalty",
+      "app_store_url": "https://apps.shopify.com/growave",
+      "merchant_instruction": "Install Growave from the Shopify App Store and configure the loyalty widget in your Growave dashboard.",
+      "confidence_base": 0.97,
+      "classes": ["growave-widget", "ssw-widget", "socialshopwave-widget"],
+      "data_attributes": ["data-growave"],
+      "ids": [],
+      "scripts": ["growave.io"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "subscriptions": {
+    "recharge": {
+      "app_name": "Recharge Subscriptions",
+      "app_slug": "recharge",
+      "placeholder_type": "subscription",
+      "app_store_url": "https://apps.shopify.com/subscription-payments",
+      "merchant_instruction": "Install Recharge from the Shopify App Store. The subscription widget will appear automatically on product pages. Ensure the Recharge theme extension is enabled.",
+      "confidence_base": 0.99,
+      "classes": ["rc_widget", "recharge-subscription-widget", "rc-subscription-widget"],
+      "data_attributes": ["data-rc-widget"],
+      "ids": ["recharge-widget-container"],
+      "scripts": ["rechargeapps.com", "rechargepayments.com"],
+      "iframe_src_patterns": []
+    },
+    "bold_subscriptions": {
+      "app_name": "Bold Subscriptions",
+      "app_slug": "bold-subscriptions",
+      "placeholder_type": "subscription",
+      "app_store_url": "https://apps.shopify.com/recurring-orders",
+      "merchant_instruction": "Install Bold Subscriptions from the Shopify App Store. Configure the subscription widget in Bold's dashboard.",
+      "confidence_base": 0.97,
+      "classes": ["bold-subscription-widget", "bold_subscriptions"],
+      "data_attributes": ["data-bold-subscription"],
+      "ids": [],
+      "scripts": ["boldcommerce.com"],
+      "iframe_src_patterns": []
+    },
+    "skio": {
+      "app_name": "Skio Subscriptions",
+      "app_slug": "skio",
+      "placeholder_type": "subscription",
+      "app_store_url": "https://apps.shopify.com/skio",
+      "merchant_instruction": "Install Skio from the Shopify App Store. Enable the Skio theme extension to display subscription options.",
+      "confidence_base": 0.97,
+      "classes": ["skio-plan-picker", "skio-group-container"],
+      "data_attributes": ["data-skio-product"],
+      "ids": [],
+      "scripts": ["skio.com"],
+      "iframe_src_patterns": []
+    },
+    "seal_subscriptions": {
+      "app_name": "Seal Subscriptions",
+      "app_slug": "seal-subscriptions",
+      "placeholder_type": "subscription",
+      "app_store_url": "https://apps.shopify.com/seal-subscriptions",
+      "merchant_instruction": "Install Seal Subscriptions from the Shopify App Store. Enable the theme integration in the Seal Subscriptions settings.",
+      "confidence_base": 0.97,
+      "classes": ["seal-subscription-widget", "seal_subscription_widget"],
+      "data_attributes": ["data-seal-subscription"],
+      "ids": [],
+      "scripts": ["sealsubscriptions.com"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "quizzes": {
+    "octane_ai": {
+      "app_name": "Octane AI: Quiz & AI Platform",
+      "app_slug": "octane-ai",
+      "placeholder_type": "quiz",
+      "app_store_url": "https://apps.shopify.com/octane-ai",
+      "merchant_instruction": "Install Octane AI from the Shopify App Store. Create your quiz inside Octane AI and embed the quiz widget using the provided embed code in this section.",
+      "confidence_base": 0.97,
+      "classes": ["octane-quiz-widget", "octane-ai-quiz"],
+      "data_attributes": ["data-octane-ai"],
+      "ids": ["octane-quiz-container"],
+      "scripts": ["octaneai.com"],
+      "iframe_src_patterns": ["octaneai.com", "app.octaneai.com"]
+    },
+    "typeform": {
+      "app_name": "Typeform",
+      "app_slug": "typeform",
+      "placeholder_type": "quiz",
+      "app_store_url": null,
+      "merchant_instruction": "Replace this section with a Typeform embed. Go to your Typeform dashboard, select Share > Embed, and paste the embed code into a Custom Liquid block.",
+      "confidence_base": 0.99,
+      "classes": ["tf-v1-sidetab", "tf-v1-popover"],
+      "data_attributes": ["data-tf-widget", "data-tf-popup", "data-tf-live"],
+      "ids": [],
+      "scripts": ["typeform.com"],
+      "iframe_src_patterns": ["typeform.com"]
+    }
+  },
+
+  "wishlist": {
+    "wishlist_plus": {
+      "app_name": "Wishlist Plus",
+      "app_slug": "wishlist-plus",
+      "placeholder_type": "generic",
+      "app_store_url": "https://apps.shopify.com/swym-relay",
+      "merchant_instruction": "Install Wishlist Plus (by Swym) from the Shopify App Store. Enable the theme extension to add the Wishlist button to product pages.",
+      "confidence_base": 0.99,
+      "classes": ["swym-button", "swym-add-to-wishlist", "swym-wishlist-btn"],
+      "data_attributes": ["data-with-epi", "data-swym-add-to-wishlist"],
+      "ids": ["swym-ui-container"],
+      "scripts": ["swym.io", "swymrelay.com"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "size_guides": {
+    "kiwi_sizing": {
+      "app_name": "Kiwi Size Chart & Recommender",
+      "app_slug": "kiwi-sizing",
+      "placeholder_type": "generic",
+      "app_store_url": "https://apps.shopify.com/kiwi-size-chart-recommender",
+      "merchant_instruction": "Install Kiwi Sizing from the Shopify App Store. Configure your size chart in the Kiwi dashboard — it will appear automatically on product pages.",
+      "confidence_base": 0.97,
+      "classes": ["kiwi-size-chart-widget", "kiwi_size_chart_widget"],
+      "data_attributes": ["data-kiwi-product-id"],
+      "ids": ["kiwi_size_chart"],
+      "scripts": ["kiwiapp.io"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "page_builders": {
+    "shogun": {
+      "app_name": "Shogun Page Builder",
+      "app_slug": "shogun",
+      "placeholder_type": "generic",
+      "app_store_url": "https://apps.shopify.com/shogun",
+      "merchant_instruction": "This section was built using Shogun Page Builder. Install Shogun from the Shopify App Store to recreate this content, or replace this section with native Dawn sections.",
+      "confidence_base": 0.99,
+      "classes": ["shg-page", "shg-row", "shg-col", "shogun-root"],
+      "data_attributes": ["data-shogun-id"],
+      "ids": ["shg-page"],
+      "scripts": ["getshogun.com"],
+      "iframe_src_patterns": []
+    },
+    "pagefly": {
+      "app_name": "PageFly Landing Page Builder",
+      "app_slug": "pagefly",
+      "placeholder_type": "generic",
+      "app_store_url": "https://apps.shopify.com/pagefly",
+      "merchant_instruction": "This section was built using PageFly. Install PageFly from the Shopify App Store to recreate it, or replace with native Dawn sections.",
+      "confidence_base": 0.99,
+      "classes": ["pf-content", "pf-section", "pf-c-pdp"],
+      "data_attributes": ["data-pf-type"],
+      "ids": [],
+      "scripts": ["pagefly.io"],
+      "iframe_src_patterns": []
+    },
+    "gempages": {
+      "app_name": "GemPages Landing Page Builder",
+      "app_slug": "gempages",
+      "placeholder_type": "generic",
+      "app_store_url": "https://apps.shopify.com/gempages",
+      "merchant_instruction": "This section was built with GemPages. Install GemPages from the Shopify App Store to recreate it, or rebuild with native Dawn sections.",
+      "confidence_base": 0.99,
+      "classes": ["gempages_widget", "gf-element", "gf-section"],
+      "data_attributes": ["data-label"],
+      "ids": ["gempages-content"],
+      "scripts": ["gempages.me"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "live_chat": {
+    "gorgias": {
+      "app_name": "Gorgias — Live Chat & Helpdesk",
+      "app_slug": "gorgias",
+      "placeholder_type": "generic",
+      "app_store_url": "https://apps.shopify.com/gorgias",
+      "merchant_instruction": "Install Gorgias from the Shopify App Store. The chat widget is injected globally and does not need to be added to individual sections.",
+      "confidence_base": 0.99,
+      "classes": ["gorgias-chat-launcher-container"],
+      "data_attributes": [],
+      "ids": ["gorgias-chat-container"],
+      "scripts": ["config.gorgias.chat"],
+      "iframe_src_patterns": ["gorgias.chat"]
+    },
+    "tidio": {
+      "app_name": "Tidio Live Chat",
+      "app_slug": "tidio",
+      "placeholder_type": "generic",
+      "app_store_url": "https://apps.shopify.com/tidio-chat",
+      "merchant_instruction": "Install Tidio from the Shopify App Store. The chat widget is injected globally.",
+      "confidence_base": 0.99,
+      "classes": ["tidio-chat"],
+      "data_attributes": [],
+      "ids": ["tidio-chat"],
+      "scripts": ["code.tidio.co"],
+      "iframe_src_patterns": []
+    }
+  },
+
+  "_allowlist": {
+    "description": "These are Dawn native class patterns. If a section DOM snippet matches ONLY these, do NOT classify it as an app.",
+    "dawn_native_classes": [
+      "product", "product__media", "product__info", "product-form",
+      "card-wrapper", "card", "card__media", "card__content",
+      "price", "price__regular", "price--on-sale",
+      "button", "button--primary", "button--secondary", "button--full-width",
+      "page-width", "grid", "grid__item",
+      "section", "shopify-section",
+      "color-scheme", "gradient",
+      "facets", "facet-filters-form",
+      "cart-drawer", "cart-notification",
+      "header", "header__inner",
+      "announcement-bar",
+      "footer", "footer__content"
+    ]
+  }
+}

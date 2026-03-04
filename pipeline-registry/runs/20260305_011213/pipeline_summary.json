@@ -1,0 +1,133 @@
+{
+  "run_id": "20260305_011213",
+  "sections": [
+    {
+      "section_id": "product-hero",
+      "section_type": "product_gallery",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "social-proof-stats",
+      "section_type": "trust_badges",
+      "compliance_score": 0.8,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "inline-testimonial",
+      "section_type": "testimonials",
+      "compliance_score": 0.85,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "faq-accordion",
+      "section_type": "faq",
+      "compliance_score": 0.93,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "as-seen-in",
+      "section_type": "image_banner",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "symptoms-explainer",
+      "section_type": "rich_text",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "symptom-cause-table",
+      "section_type": "rich_text",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "drainage-system-explainer",
+      "section_type": "rich_text",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "why-nothing-worked",
+      "section_type": "rich_text",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "ingredients-system",
+      "section_type": "description",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "synergistic-effect",
+      "section_type": "rich_text",
+      "compliance_score": 0.87,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "reviews-section",
+      "section_type": "reviews",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "trust-badges-bar",
+      "section_type": "trust_badges",
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    },
+    {
+      "section_id": "expert-advice",
+      "section_type": "testimonials",
+      "compliance_score": 0.75,
+      "compliance_passes": 1,
+      "escalated": false,
+      "regression_decision": "—",
+      "ok": true
+    }
+  ],
+  "total": 14,
+  "ok": 14
+}

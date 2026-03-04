@@ -1,0 +1,185 @@
+[
+  {
+    "section_id": "product-hero",
+    "is_app": false,
+    "detection_method": "skipped_native_type",
+    "confidence": 1.0,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "Section type 'product_gallery' is always Shopify-native"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "social-proof-stats",
+    "is_app": true,
+    "detection_method": "fingerprint",
+    "confidence": 0.99,
+    "app_name": "Unknown App (iframe)",
+    "app_slug": "unknown-app-iframe",
+    "evidence": [
+      "Fingerprint match on class/attr/iframe"
+    ],
+    "placeholder_config": {
+      "type": "generic",
+      "liquid_block_name": "app-placeholder-unknown-app-iframe",
+      "merchant_instruction": "This section is rendered by a third-party app via an iframe. Re-install the app and configure it to display here.",
+      "app_store_url": null
+    }
+  },
+  {
+    "section_id": "inline-testimonial",
+    "is_app": true,
+    "detection_method": "fingerprint",
+    "confidence": 0.99,
+    "app_name": "Unknown App (iframe)",
+    "app_slug": "unknown-app-iframe",
+    "evidence": [
+      "Fingerprint match on class/attr/iframe"
+    ],
+    "placeholder_config": {
+      "type": "generic",
+      "liquid_block_name": "app-placeholder-unknown-app-iframe",
+      "merchant_instruction": "This section is rendered by a third-party app via an iframe. Re-install the app and configure it to display here.",
+      "app_store_url": null
+    }
+  },
+  {
+    "section_id": "faq-accordion",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "as-seen-in",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "symptoms-explainer",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "symptom-cause-table",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "drainage-system-explainer",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "why-nothing-worked",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "ingredients-system",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "synergistic-effect",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "reviews-section",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "trust-badges-bar",
+    "is_app": false,
+    "detection_method": "no_signals",
+    "confidence": 0.85,
+    "app_name": null,
+    "app_slug": null,
+    "evidence": [
+      "No app fingerprints or suspicious signals detected"
+    ],
+    "placeholder_config": null
+  },
+  {
+    "section_id": "expert-advice",
+    "is_app": true,
+    "detection_method": "fingerprint",
+    "confidence": 0.99,
+    "app_name": "Judge.me Product Reviews",
+    "app_slug": "judge-me",
+    "evidence": [
+      "Fingerprint match on class/attr/iframe"
+    ],
+    "placeholder_config": {
+      "type": "reviews",
+      "liquid_block_name": "app-placeholder-judge-me",
+      "merchant_instruction": "Install Judge.me from the Shopify App Store. Go to Apps > Judge.me > Widgets, create a Reviews Widget and copy the embed code into a Custom Liquid block inside this section.",
+      "app_store_url": "https://apps.shopify.com/judgeme"
+    }
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "title": "product.title",
+  "vendor": "product.vendor",
+  "type": "product.type",
+  "price_min": "product.price_min | money",
+  "price_max": "product.price_max | money",
+  "price_varies": "product.price_varies",
+  "compare_at_price": "product.compare_at_price | money",
+  "available": "product.available",
+  "selected_variant": "product.selected_or_first_available_variant",
+  "variants": "product.variants",
+  "options": "product.options",
+  "options_with_values": "product.options_with_values",
+  "images": "product.images",
+  "featured_image": "product.featured_image",
+  "description": "product.description",
+  "url": "product.url",
+  "handle": "product.handle",
+  "tags": "product.tags"
+}

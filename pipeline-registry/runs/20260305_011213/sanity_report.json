@@ -1,0 +1,90 @@
+{
+  "valid": false,
+  "product_liquid_map": {
+    "title": "product.title",
+    "vendor": "product.vendor",
+    "type": "product.type",
+    "price_min": "product.price_min | money",
+    "price_max": "product.price_max | money",
+    "price_varies": "product.price_varies",
+    "compare_at_price": "product.compare_at_price | money",
+    "available": "product.available",
+    "selected_variant": "product.selected_or_first_available_variant",
+    "variants": "product.variants",
+    "options": "product.options",
+    "options_with_values": "product.options_with_values",
+    "images": "product.images",
+    "featured_image": "product.featured_image",
+    "description": "product.description",
+    "url": "product.url",
+    "handle": "product.handle",
+    "tags": "product.tags"
+  },
+  "variant_structure": {
+    "option_count": 0,
+    "option_names": [],
+    "total_variants": 0,
+    "has_sold_out_variants": false,
+    "has_compare_at_price": false
+  },
+  "metafield_recommendations": [
+    {
+      "detected_as": "Emoji-rich benefit bullet points embedded in description (🍑 skin/cellulite benefits, ❤️ blood flow/firming benefits)",
+      "recommended_accessor": "product.metafields.custom.benefits",
+      "requires_metafield_definition": true,
+      "note": "The description contains structured benefit statements prefixed with emoji icons. Consider extracting these into a metafield of type list.single_line_text_field so section agents can render them as styled benefit blocks rather than raw paragraph text."
+    },
+    {
+      "detected_as": "Subtitle/tagline text: 'Clinically formulated 7 active ingredient formula developed to make you feel good about your cellulite'",
+      "recommended_accessor": "product.metafields.custom.subtitle",
+      "requires_metafield_definition": true,
+      "note": "The leading sentence in the description reads as a marketing subtitle rather than body copy. If the source page renders this separately from the main description, it should be a dedicated metafield."
+    },
+    {
+      "detected_as": "Badge text 'New Maximum Potency Formula' present in product title",
+      "recommended_accessor": "product.metafields.custom.badge",
+      "requires_metafield_definition": true,
+      "note": "The title begins with 'New Maximum Potency Formula' which likely renders as a badge or callout on the source page. Consider moving this to a metafield so the product title in Shopify can be cleaner (e.g., 'Lymphatic Drainage Capsules by Sculptiqu') while the badge renders separately."
+    }
+  ],
+  "errors": [
+    {
+      "field": "variants",
+      "issue": "Extracted variant array is empty. Every Shopify product must have at least one variant. The crawler failed to extract variant data from JSON-LD or the DOM.",
+      "blocking": true,
+      "resolution": "Re-crawl the source URL targeting the product JSON-LD script tag, Shopify's /products/<handle>.json endpoint (https://trysculptique.com/products/lymph-cc-select.json), or the embedded `var meta = {}` / `ShopifyAnalytics.meta` objects. At minimum, one variant with a valid price (integer in cents) is required."
+    },
+    {
+      "field": "price",
+      "issue": "Price is null. No price was extracted for the product or any variant. Without a price, no section agent can render the product price, add-to-cart, or variant selector correctly.",
+      "blocking": true,
+      "resolution": "Obtain the price from the Shopify product JSON endpoint or from the DOM (look for `.price`, `[data-product-price]`, or JSON-LD `offers.price`). Price must be an integer in cents (e.g., 4900 for $49.00)."
+    }
+  ],
+  "warnings": [
+    {
+      "field": "vendor",
+      "issue": "Vendor is null. Non-critical but the source page likely uses 'Sculptiqu' or 'Sculptique' as the vendor. Section agents should use product.vendor with a conditional check."
+    },
+    {
+      "field": "type",
+      "issue": "Product type is null. Non-critical. Likely 'Supplement' or 'Health' based on the product name. Section agents should conditionally render product.type."
+    },
+    {
+      "field": "images[0].alt",
+      "issue": "Featured image has null alt text. Section agents must provide a fallback using product.title as the alt attribute value."
+    },
+    {
+      "field": "compare_at_price",
+      "issue": "Compare-at price is null. No sale badge or strikethrough price rendering is needed unless variant data reveals otherwise after re-extraction."
+    },
+    {
+      "field": "options",
+      "issue": "Options array is empty. This may indicate a single-variant product (Default Title) or may be a consequence of the missing variant data. After re-extraction, if the product has only one variant with title 'Default Title', the variant selector should be hidden."
+    },
+    {
+      "field": "images",
+      "issue": "Only one product image was extracted. The source page likely has additional images (gallery/carousel). Re-crawl should attempt to capture all product images from the media gallery."
+    }
+  ]
+}

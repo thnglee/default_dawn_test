@@ -1,0 +1,271 @@
+{
+  "sections": [
+    {
+      "section_id": "product-hero",
+      "section_type": "product_gallery",
+      "layout_pattern": "two_col_media_left",
+      "viewport_range": [
+        0,
+        1
+      ],
+      "content_signals": [
+        "product image with spring sale badge",
+        "thumbnail gallery strip",
+        "nutritional information button",
+        "star rating 4.8/5 based on 2381 reviews",
+        "product title",
+        "benefit icons with descriptions",
+        "clinicians choice badge",
+        "bundle pricing options",
+        "add to cart button",
+        "payment method icons",
+        "express shipping delivery date"
+      ],
+      "confidence": 0.95,
+      "notes": ""
+    },
+    {
+      "section_id": "social-proof-stats",
+      "section_type": "trust_badges",
+      "layout_pattern": "two_col_equal",
+      "viewport_range": [
+        1
+      ],
+      "content_signals": [
+        "87% statistic donut chart",
+        "91% statistic donut chart",
+        "reported less bloating claim",
+        "reported less puffiness claim",
+        "independent customer panel citation"
+      ],
+      "confidence": 0.88,
+      "notes": ""
+    },
+    {
+      "section_id": "inline-testimonial",
+      "section_type": "testimonials",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        1,
+        2
+      ],
+      "content_signals": [
+        "reviewer name Margaret Ellison",
+        "verified customer badge",
+        "star rating",
+        "personal testimonial text"
+      ],
+      "confidence": 0.85,
+      "notes": ""
+    },
+    {
+      "section_id": "faq-accordion",
+      "section_type": "faq",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        2
+      ],
+      "content_signals": [
+        "ingredients proven by science accordion",
+        "how does it actually work accordion",
+        "shipping and returns accordion",
+        "plus expand icons"
+      ],
+      "confidence": 0.94,
+      "notes": ""
+    },
+    {
+      "section_id": "as-seen-in",
+      "section_type": "image_banner",
+      "layout_pattern": "full_width",
+      "viewport_range": [
+        2
+      ],
+      "content_signals": [
+        "As Seen In heading",
+        "Vogue logo",
+        "Womens Health logo",
+        "Grazia logo",
+        "dark background media bar"
+      ],
+      "confidence": 0.96,
+      "notes": ""
+    },
+    {
+      "section_id": "symptoms-explainer",
+      "section_type": "rich_text",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        2,
+        3
+      ],
+      "content_signals": [
+        "why your symptoms are connected heading",
+        "five symptom image cards in row",
+        "arrow indicators pointing down",
+        "pink callout box with root cause message"
+      ],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    {
+      "section_id": "symptom-cause-table",
+      "section_type": "rich_text",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        3,
+        4
+      ],
+      "content_signals": [
+        "The Connection You've Been Missing heading",
+        "symptom vs real cause table",
+        "icon rows for bloating puffiness swollen legs",
+        "cellulite appearance row",
+        "brain fog and morning stiffness rows"
+      ],
+      "confidence": 0.92,
+      "notes": ""
+    },
+    {
+      "section_id": "drainage-system-explainer",
+      "section_type": "rich_text",
+      "layout_pattern": "two_col_media_right",
+      "viewport_range": [
+        4,
+        5,
+        6
+      ],
+      "content_signals": [
+        "Your Hidden Drainage System heading",
+        "lymphatic system health chart",
+        "before after age 35 graph",
+        "fluid drains vs fluid builds up anatomy illustration",
+        "red X failure bullet points",
+        "pink callout box with symptom explanations"
+      ],
+      "confidence": 0.91,
+      "notes": ""
+    },
+    {
+      "section_id": "why-nothing-worked",
+      "section_type": "rich_text",
+      "layout_pattern": "three_col_grid",
+      "viewport_range": [
+        6,
+        7
+      ],
+      "content_signals": [
+        "Why Nothing Has Worked heading",
+        "three crossed-out solution images",
+        "diet failure card",
+        "viral lymphatic drops failure card",
+        "massage compression socks failure card",
+        "why it failed explanations",
+        "The Missing Piece callout box",
+        "CTA button try lymphatic drainage risk-free",
+        "60 day money-back guarantee badge"
+      ],
+      "confidence": 0.93,
+      "notes": ""
+    },
+    {
+      "section_id": "ingredients-system",
+      "section_type": "description",
+      "layout_pattern": "four_col_grid",
+      "viewport_range": [
+        8,
+        9
+      ],
+      "content_signals": [
+        "The 8-Ingredient System heading",
+        "ingredient cards with images and dosages",
+        "Cleavers Extract card",
+        "Dandelion Extract card",
+        "Bromelain Powder card",
+        "Rutin card",
+        "Burdock Root Powder card",
+        "Echinacea Purpurea Extract card",
+        "Kelp Extract card",
+        "Lemon Powder card",
+        "expandable chevrons per ingredient"
+      ],
+      "confidence": 0.95,
+      "notes": ""
+    },
+    {
+      "section_id": "synergistic-effect",
+      "section_type": "rich_text",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        9,
+        10
+      ],
+      "content_signals": [
+        "The Synergistic Effect heading",
+        "green bordered callout box",
+        "checkmark benefit list",
+        "root cause restoration statement",
+        "beige background"
+      ],
+      "confidence": 0.89,
+      "notes": ""
+    },
+    {
+      "section_id": "reviews-section",
+      "section_type": "reviews",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        10,
+        11,
+        12
+      ],
+      "content_signals": [
+        "Trustpilot 4.8 out of 5 badge",
+        "Real Women Real Results heading",
+        "Customer Reviews subheading",
+        "4.75 out of 5 aggregate rating",
+        "rating distribution bar chart",
+        "write a review button",
+        "diamond authenticity badge",
+        "sort by most recent dropdown",
+        "individual review cards with verified badges",
+        "reviewer photos",
+        "pagination controls"
+      ],
+      "confidence": 0.97,
+      "notes": ""
+    },
+    {
+      "section_id": "trust-badges-bar",
+      "section_type": "trust_badges",
+      "layout_pattern": "four_col_grid",
+      "viewport_range": [
+        12
+      ],
+      "content_signals": [
+        "free shipping from USA icon",
+        "naturally supports your body icon",
+        "100% natural ingredients icon",
+        "try it risk free for 60 days icon",
+        "green background bar"
+      ],
+      "confidence": 0.95,
+      "notes": ""
+    },
+    {
+      "section_id": "expert-advice",
+      "section_type": "testimonials",
+      "layout_pattern": "two_col_media_right",
+      "viewport_range": [
+        12
+      ],
+      "content_signals": [
+        "Expert Advice from Dr. Emily Chen heading",
+        "date stamp July 4th 2025",
+        "doctor portrait image"
+      ],
+      "confidence": 0.82,
+      "notes": ""
+    }
+  ]
+}
