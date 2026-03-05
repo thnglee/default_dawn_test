@@ -1,0 +1,56 @@
+{
+  "valid": true,
+  "product_liquid_map": {
+    "title": "product.title",
+    "vendor": "product.vendor",
+    "type": "product.type",
+    "price_min": "product.price_min | money",
+    "price_max": "product.price_max | money",
+    "price_varies": "product.price_varies",
+    "compare_at_price": "product.compare_at_price | money",
+    "available": "product.available",
+    "selected_variant": "product.selected_or_first_available_variant",
+    "variants": "product.variants",
+    "options": "product.options",
+    "options_with_values": "product.options_with_values",
+    "images": "product.images",
+    "featured_image": "product.featured_image",
+    "description": "product.description",
+    "url": "product.url",
+    "handle": "product.handle",
+    "tags": "product.tags"
+  },
+  "variant_structure": {
+    "option_count": 1,
+    "option_names": [
+      "Quantity"
+    ],
+    "total_variants": 3,
+    "has_sold_out_variants": false,
+    "has_compare_at_price": true
+  },
+  "metafield_recommendations": [],
+  "errors": [],
+  "warnings": [
+    {
+      "field": "type",
+      "issue": "Product type is null. Non-critical but collection filtering and breadcrumbs that rely on product.type will render empty."
+    },
+    {
+      "field": "images",
+      "issue": "All 8 product images have null alt text. Conversion agents must provide a fallback using product.title for accessibility (e.g. {{ image.alt | default: product.title }})."
+    },
+    {
+      "field": "options[0]",
+      "issue": "Option name is 'Quantity' but values represent bundle tiers ('1 Bottle', 'Buy 2 Get 1 Free', 'Buy 3 Get 2 Free'). This is a bundle-style variant selector, not a traditional quantity picker. Conversion agents should render this as a card/pill selector rather than a dropdown, and should NOT render a separate quantity input if the variant already implies quantity."
+    },
+    {
+      "field": "compare_at_price",
+      "issue": "All variants have compare_at_price set. Sale badge and savings display should be rendered. Price differences are significant (47–68% off) — conversion agents should consider showing a 'Save X%' or 'Save $X' indicator per variant."
+    },
+    {
+      "field": "tags",
+      "issue": "No tags were extracted. product.tags will be empty unless the Shopify store has tags assigned. Conversion agents should not rely on tags for conditional rendering."
+    }
+  ]
+}

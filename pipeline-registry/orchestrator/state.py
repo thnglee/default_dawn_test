@@ -18,6 +18,7 @@ SANITY_REPORT = "sanity_report.json"
 SECTION_MAP = "section_map.json"
 APP_CLASSIFICATION = "app_classification.json"  # list of per-section results
 SECTIONS_DRAFT = "sections_draft.json"           # {section_id: liquid_string}
+SECTIONS_TEMPLATE_DATA = "sections_template_data.json"  # {section_id: {settings, blocks, block_order}}
 COMPLIANCE_REPORT = "compliance_report.json"     # {section_id: report}
 REGRESSION_REPORT = "regression_report.json"
 PIPELINE_SUMMARY = "pipeline_summary.json"
@@ -113,6 +114,12 @@ class RunState:
 
     def read_sections_draft(self) -> dict:
         return self.read(SECTIONS_DRAFT)
+
+    def write_sections_template_data(self, data: dict) -> None:
+        self.write(SECTIONS_TEMPLATE_DATA, data)
+
+    def read_sections_template_data(self) -> dict:
+        return self.read(SECTIONS_TEMPLATE_DATA)
 
     def write_compliance_report(self, data: dict) -> None:
         self.write(COMPLIANCE_REPORT, data)

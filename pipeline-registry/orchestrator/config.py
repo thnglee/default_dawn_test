@@ -27,10 +27,9 @@ RUNS_DIR       = REGISTRY_DIR / "runs"
 SECTIONS_OUT   = REPO_ROOT / "sections"
 TEMPLATES_OUT  = REPO_ROOT / "templates"
 
-# ── Claude models ────────────────────────────────────────────────────────────
-MODEL_DEFAULT          = "claude-opus-4-6"   # layout, compliance, regression
-MODEL_SECTION_CONVERT  = "claude-opus-4-6"   # highest-value prompt
-MODEL_FAST             = "claude-opus-4-6"   # product sanity, app detection
+# ── Models ───────────────────────────────────────────────────────────────────
+MODEL_VISION           = "gpt-4o"            # OpenAI vision (layout, regression)
+MODEL_SECTION_CONVERT  = "claude-cli"        # label only — CLI picks its own model
 
 # ── Playwright capture settings ───────────────────────────────────────────────
 VIEWPORT_WIDTH   = 1280
@@ -62,15 +61,15 @@ REGRESSION_PRIORITY_TYPES = {"product_gallery", "product_info"}
 DAWN_VERSION = "dawn-15.0"
 
 # ── Env vars (never hardcode) ────────────────────────────────────────────────
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+OPENAI_API_KEY    = os.environ.get("OPENAI_API_KEY", "")
 FIGMA_API_TOKEN   = os.environ.get("FIGMA_API_TOKEN", "")   # optional
 SHOPIFY_STORE     = os.environ.get("SHOPIFY_STORE", "")      # optional
 
 # ── Validation ───────────────────────────────────────────────────────────────
 def validate():
     """Call at startup. Raises if required env vars are missing."""
-    if not ANTHROPIC_API_KEY:
+    if not OPENAI_API_KEY:
         raise EnvironmentError(
-            "ANTHROPIC_API_KEY is not set. "
-            "Run: export ANTHROPIC_API_KEY=your-key"
+            "OPENAI_API_KEY is not set. "
+            "Run: export OPENAI_API_KEY=your-key"
         )

@@ -1,27 +1,31 @@
 """
-Anthropic API wrapper.
-All Claude calls go through here — text, vision, JSON parsing.
+LLM wrapper — two backends:
+  • OpenAI (gpt-4o) for vision tasks  (call_vision_json)
+  • Claude Code CLI for text/JSON/code (call, call_json, call_section_conversion)
 """
 
 import base64
 import json
+import os
 import re
+import subprocess
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
 
-import anthropic
+import openai
 
-from config import MODEL_DEFAULT, MODEL_SECTION_CONVERT
+from config import MODEL_VISION, OPENAI_API_KEY
 
-_client: anthropic.Anthropic | None = None
+_oa_client: openai.OpenAI | None = None
 
 
-def _get_client() -> anthropic.Anthropic:
-    global _client
-    if _client is None:
-        _client = anthropic.Anthropic()
-    return _client
+def _get_openai() -> openai.OpenAI:
+    global _oa_client
+    if _oa_client is None:
+        _oa_client = openai.OpenAI(api_key=OPENAI_API_KEY)
+    return _oa_client
 
 
 # ── helpers ──────────────────────────────────────────────────────────────────
@@ -31,22 +35,14 @@ def _encode_image(path: Path) -> str:
     return base64.standard_b64encode(path.read_bytes()).decode("utf-8")
 
 
-def _image_block(path: Path) -> dict:
+def _image_data_url(path: Path) -> str:
     suffix = path.suffix.lower()
     media_type = "image/png" if suffix == ".png" else "image/jpeg"
-    return {
-        "type": "image",
-        "source": {
-            "type": "base64",
-            "media_type": media_type,
-            "data": _encode_image(path),
-        },
-    }
+    return f"data:{media_type};base64,{_encode_image(path)}"
 
 
 def _extract_json(text: str) -> Any:
     """Pull first JSON object or array out of a string."""
-    # Try direct parse first
     text = text.strip()
     try:
         return json.loads(text)
@@ -91,112 +87,151 @@ def _extract_json(text: str) -> Any:
     raise ValueError(f"No valid JSON found in response:\n{text[:300]}")
 
 
-# ── core call ─────────────────────────────────────────────────────────────────
-
-def call(
-    system: str,
-    user_content: list[dict] | str,
-    *,
-    model: str = MODEL_DEFAULT,
-    max_tokens: int = 4096,
-    use_thinking: bool = False,
-    retries: int = 3,
-) -> str:
-    """
-    Make a single Claude API call and return the full text response.
-
-    For large outputs (section_conversion), streaming is used internally
-    via .stream() + .get_final_message() to avoid HTTP timeouts.
-    """
-    client = _get_client()
-
-    if isinstance(user_content, str):
-        user_content = [{"type": "text", "text": user_content}]
-
-    messages = [{"role": "user", "content": user_content}]
-
-    kwargs: dict[str, Any] = {
-        "model": model,
-        "max_tokens": max_tokens,
-        "system": system,
-        "messages": messages,
-    }
-
-    if use_thinking:
-        kwargs["thinking"] = {"type": "adaptive"}
-
-    last_exc: Exception | None = None
-    for attempt in range(retries):
-        try:
-            if max_tokens >= 2048:
-                # Use streaming to avoid HTTP timeouts on large outputs
-                with client.messages.stream(**kwargs) as stream:
-                    final = stream.get_final_message()
-            else:
-                final = client.messages.create(**kwargs)
-
-            # Collect text blocks (skip thinking blocks)
-            parts = [
-                block.text
-                for block in final.content
-                if block.type == "text"
-            ]
-            return "\n".join(parts)
-
-        except anthropic.RateLimitError as e:
-            wait = int(e.response.headers.get("retry-after", "60"))
-            time.sleep(wait)
-            last_exc = e
-        except anthropic.APIStatusError as e:
-            if e.status_code >= 500:
-                time.sleep(10 * (attempt + 1))
-                last_exc = e
-            else:
-                raise
-        except anthropic.APIConnectionError as e:
-            time.sleep(5 * (attempt + 1))
-            last_exc = e
-
-    raise RuntimeError(f"LLM call failed after {retries} retries") from last_exc
-
-
-def call_json(
-    system: str,
-    user_content: list[dict] | str,
-    *,
-    model: str = MODEL_DEFAULT,
-    max_tokens: int = 2048,
-    use_thinking: bool = False,
-) -> Any:
-    """Call Claude and parse the response as JSON."""
-    text = call(
-        system,
-        user_content,
-        model=model,
-        max_tokens=max_tokens,
-        use_thinking=use_thinking,
-    )
-    return _extract_json(text)
-
+# ── OpenAI vision backend ────────────────────────────────────────────────────
 
 def call_vision_json(
     system: str,
     text_prompt: str,
     image_paths: list[Path],
     *,
-    model: str = MODEL_DEFAULT,
     max_tokens: int = 2048,
+    retries: int = 3,
 ) -> Any:
     """
-    Vision call with one or more images + a text prompt.
+    Vision call with one or more images + a text prompt via OpenAI gpt-4o.
     Returns parsed JSON.
     """
+    client = _get_openai()
+
+    # Build user message content: images then text
     content: list[dict] = []
     for img_path in image_paths:
-        content.append(_image_block(img_path))
+        content.append({
+            "type": "image_url",
+            "image_url": {"url": _image_data_url(img_path), "detail": "high"},
+        })
     content.append({"type": "text", "text": text_prompt})
 
-    return call_json(system, content, model=model, max_tokens=max_tokens)
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": content},
+    ]
+
+    last_exc: Exception | None = None
+    for attempt in range(retries):
+        try:
+            resp = client.chat.completions.create(
+                model=MODEL_VISION,
+                messages=messages,
+                max_tokens=max_tokens,
+                response_format={"type": "json_object"},
+            )
+            text = resp.choices[0].message.content or ""
+            return _extract_json(text)
+
+        except openai.RateLimitError as e:
+            wait = 60
+            print(f"  ⚠ OpenAI rate limit, waiting {wait}s (attempt {attempt + 1})")
+            time.sleep(wait)
+            last_exc = e
+        except openai.APIStatusError as e:
+            if e.status_code >= 500:
+                time.sleep(10 * (attempt + 1))
+                last_exc = e
+            else:
+                raise
+        except openai.APIConnectionError as e:
+            time.sleep(5 * (attempt + 1))
+            last_exc = e
+
+    raise RuntimeError(f"OpenAI vision call failed after {retries} retries") from last_exc
+
+
+# ── Claude Code CLI backend ──────────────────────────────────────────────────
+
+def _claude_cli(
+    system: str,
+    user_text: str,
+    *,
+    retries: int = 3,
+) -> str:
+    """
+    Call `claude --print` via subprocess.
+    System prompt via --system-prompt flag (or temp file if >100KB).
+    User content piped via stdin.
+    """
+    last_exc: Exception | None = None
+
+    # Strip env vars that prevent nested Claude sessions
+    env = {k: v for k, v in os.environ.items() if not k.startswith("CLAUDECODE")}
+
+    for attempt in range(retries):
+        cmd = ["claude", "--print", "--max-turns", "5", "--verbose"]
+        tmp_file = None
+
+        try:
+            # System prompt: flag for short, temp file for long
+            if len(system.encode("utf-8")) > 100_000:
+                tmp_file = tempfile.NamedTemporaryFile(
+                    mode="w", suffix=".txt", delete=False
+                )
+                tmp_file.write(system)
+                tmp_file.flush()
+                cmd += ["--system-prompt", f"$(cat {tmp_file.name})"]
+            else:
+                cmd += ["--system-prompt", system]
+
+            result = subprocess.run(
+                cmd,
+                input=user_text,
+                capture_output=True,
+                text=True,
+                timeout=300,
+                env=env,
+            )
+
+            if result.returncode == 0:
+                return result.stdout.strip()
+
+            stderr = result.stderr.strip()
+            print(f"  ⚠ Claude CLI exit code {result.returncode} (attempt {attempt + 1}): {stderr[:200]}")
+            last_exc = RuntimeError(f"claude exit {result.returncode}: {stderr[:200]}")
+            time.sleep(5 * (attempt + 1))
+
+        except subprocess.TimeoutExpired as e:
+            print(f"  ⚠ Claude CLI timeout (attempt {attempt + 1})")
+            last_exc = e
+            time.sleep(5 * (attempt + 1))
+        finally:
+            if tmp_file is not None:
+                Path(tmp_file.name).unlink(missing_ok=True)
+
+    raise RuntimeError(f"Claude CLI call failed after {retries} retries") from last_exc
+
+
+def call(
+    system: str,
+    user_content: str,
+    *,
+    max_tokens: int = 4096,
+    retries: int = 3,
+) -> str:
+    """
+    Make a Claude Code CLI call and return the full text response.
+    max_tokens is accepted for API compatibility but not used by CLI.
+    """
+    return _claude_cli(system, user_content, retries=retries)
+
+
+def call_json(
+    system: str,
+    user_content: str,
+    *,
+    max_tokens: int = 2048,
+) -> Any:
+    """Call Claude CLI and parse the response as JSON."""
+    text = call(system, user_content, max_tokens=max_tokens)
+    return _extract_json(text)
 
 
 def call_section_conversion(
@@ -205,13 +240,7 @@ def call_section_conversion(
 ) -> str:
     """
     Section conversion call — returns raw Liquid file string (not JSON).
-    Uses section-conversion model with large token budget.
+    Uses Claude Code CLI.
     """
     user_text = json.dumps(user_payload, indent=2)
-    return call(
-        system,
-        user_text,
-        model=MODEL_SECTION_CONVERT,
-        max_tokens=6000,
-        use_thinking=True,
-    )
+    return call(system, user_text, max_tokens=6000)

@@ -1,0 +1,128 @@
+{
+  "sections": [
+    {
+      "section_id": "product-hero",
+      "section_type": "product_gallery",
+      "layout_pattern": "two_col_media_left",
+      "viewport_range": [
+        0
+      ],
+      "content_signals": [
+        "product image",
+        "product title",
+        "star rating",
+        "spring sale badge"
+      ],
+      "confidence": 0.95,
+      "notes": ""
+    },
+    {
+      "section_id": "product-info",
+      "section_type": "product_info",
+      "layout_pattern": "two_col_media_left",
+      "viewport_range": [
+        0,
+        1
+      ],
+      "content_signals": [
+        "benefits list",
+        "join statement",
+        "clinicians' choice badge"
+      ],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    {
+      "section_id": "pricing-section",
+      "section_type": "product_info",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        1
+      ],
+      "content_signals": [
+        "pricing options",
+        "add to cart button",
+        "shipping information"
+      ],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    {
+      "section_id": "benefits-details",
+      "section_type": "description",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        2,
+        3
+      ],
+      "content_signals": [
+        "symptoms explanation",
+        "visual comparisons",
+        "root cause details"
+      ],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    {
+      "section_id": "how-it-works",
+      "section_type": "description",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        4
+      ],
+      "content_signals": [
+        "lymphatic system explanation",
+        "visual diagrams",
+        "symptom accumulation"
+      ],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    {
+      "section_id": "ingredient-section",
+      "section_type": "description",
+      "layout_pattern": "three_col_grid",
+      "viewport_range": [
+        5
+      ],
+      "content_signals": [
+        "ingredient details",
+        "benefit explanations",
+        "therapeutic amounts"
+      ],
+      "confidence": 0.9,
+      "notes": ""
+    },
+    {
+      "section_id": "reviews-section",
+      "section_type": "reviews",
+      "layout_pattern": "single_col",
+      "viewport_range": [
+        6,
+        7
+      ],
+      "content_signals": [
+        "star ratings",
+        "customer reviews",
+        "reviewer names"
+      ],
+      "confidence": 0.95,
+      "notes": ""
+    },
+    {
+      "section_id": "testimonial-section",
+      "section_type": "testimonials",
+      "layout_pattern": "two_col_equal",
+      "viewport_range": [
+        8
+      ],
+      "content_signals": [
+        "expert advice",
+        "doctor image",
+        "main benefits"
+      ],
+      "confidence": 0.9,
+      "notes": ""
+    }
+  ]
+}

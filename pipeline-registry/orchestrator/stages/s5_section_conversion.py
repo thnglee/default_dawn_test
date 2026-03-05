@@ -1,10 +1,11 @@
 """
 Stage 5 — Section Conversion
-Converts each non-app section's HTML snippet into a Dawn-compatible .liquid file.
+Converts each non-app section's HTML snippet into a Dawn-compatible .liquid file
+plus a template_data JSON blob with exact cloned content for product.json.
 Runs in parallel (ThreadPoolExecutor).
 
 For app sections: generates placeholder .liquid using the template.
-Outputs: sections_draft.json + per-section .liquid files in run/sections/
+Outputs: sections_draft.json + sections_template_data.json + per-section .liquid files
 """
 
 import json
@@ -16,13 +17,82 @@ import skills
 from config import CONVERSION_MAX_WORKERS, MAX_HTML_SNIPPET_CHARS
 from state import RunState
 
+# Separator between .liquid content and template_data JSON in agent output
+_TEMPLATE_DATA_SEPARATOR = "===TEMPLATE_DATA==="
+
+
+# ── output parsing ────────────────────────────────────────────────────────────
+
+def _parse_conversion_output(raw: str) -> tuple[str, dict]:
+    """
+    Split agent output into (liquid_string, template_data_dict).
+    If the separator is missing, returns empty template_data as fallback.
+    """
+    if _TEMPLATE_DATA_SEPARATOR in raw:
+        parts = raw.split(_TEMPLATE_DATA_SEPARATOR, 1)
+        liquid = parts[0].strip()
+        try:
+            template_data = json.loads(parts[1].strip())
+        except (json.JSONDecodeError, IndexError):
+            # Try extracting JSON from the remainder
+            remainder = parts[1].strip()
+            template_data = _extract_json_safe(remainder)
+    else:
+        liquid = raw.strip()
+        template_data = {}
+
+    # Ensure expected keys
+    template_data.setdefault("settings", {})
+    template_data.setdefault("blocks", {})
+    template_data.setdefault("block_order", [])
+
+    return liquid, template_data
+
+
+def _extract_json_safe(text: str) -> dict:
+    """Best-effort JSON extraction from text. Returns {} on failure."""
+    text = text.strip()
+    # Strip markdown fences
+    if text.startswith("```"):
+        lines = text.split("\n")
+        lines = [l for l in lines if not l.strip().startswith("```")]
+        text = "\n".join(lines).strip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        # Find first {
+        idx = text.find("{")
+        if idx == -1:
+            return {}
+        depth = 0
+        in_str = False
+        esc = False
+        for i, ch in enumerate(text[idx:], start=idx):
+            if esc:
+                esc = False
+                continue
+            if ch == "\\" and in_str:
+                esc = True
+                continue
+            if ch == '"':
+                in_str = not in_str
+            elif not in_str:
+                if ch == "{":
+                    depth += 1
+                elif ch == "}":
+                    depth -= 1
+                    if depth == 0:
+                        try:
+                            return json.loads(text[idx : i + 1])
+                        except json.JSONDecodeError:
+                            return {}
+    return {}
+
 
 # ── placeholder generator ─────────────────────────────────────────────────────
 
 def _make_placeholder(section_id: str, app_result: dict) -> str:
-    """Render app_placeholder.liquid.tpl with per-app values.
-    The template uses {{VARIABLE}} syntax (not Python string.Template).
-    """
+    """Render app_placeholder.liquid.tpl with per-app values."""
     tpl_str = skills.skill_app_placeholder_template()
     cfg = app_result.get("placeholder_config") or {}
 
@@ -49,14 +119,13 @@ def _convert_one(
     dom: dict,
     product_liquid_map: dict,
     system_prompt: str,
-) -> tuple[str, str]:
+) -> tuple[str, str, dict]:
     """
-    Convert one section. Returns (section_id, liquid_string).
+    Convert one section. Returns (section_id, liquid_string, template_data).
     Raises on failure.
     """
     section_id = section.get("section_id")
 
-    # Build dawn_schema_template stub for reference
     schema_stub = {
         "name": section_id.replace("_", " ").title(),
         "tag": "section",
@@ -73,8 +142,9 @@ def _convert_one(
         "dawn_schema_template": schema_stub,
     }
 
-    liquid = llm.call_section_conversion(system_prompt, payload)
-    return section_id, liquid
+    raw = llm.call_section_conversion(system_prompt, payload)
+    liquid, template_data = _parse_conversion_output(raw)
+    return section_id, liquid, template_data
 
 
 # ── main ──────────────────────────────────────────────────────────────────────
@@ -110,6 +180,7 @@ def run(state: RunState) -> dict:
     print(f"  → Converting {len(native_sections)} native + {len(app_sections)} app sections")
 
     sections_draft: dict[str, str] = {}
+    template_data_all: dict[str, dict] = {}
     system_prompt = skills.prompt_section_conversion()
 
     # ── App placeholders (fast, no LLM) ──────────────────────────────────────
@@ -117,6 +188,7 @@ def run(state: RunState) -> dict:
         sid = section.get("section_id")
         liquid = _make_placeholder(sid, app_result)
         sections_draft[sid] = liquid
+        template_data_all[sid] = {"settings": {}, "blocks": {}, "block_order": []}
         state.write_section_liquid(sid, liquid)
 
     # ── Native sections (parallel LLM) ───────────────────────────────────────
@@ -133,15 +205,19 @@ def run(state: RunState) -> dict:
         for future in as_completed(futures):
             sid = futures[future]
             try:
-                section_id, liquid = future.result()
+                section_id, liquid, template_data = future.result()
                 sections_draft[section_id] = liquid
+                template_data_all[section_id] = template_data
                 state.write_section_liquid(section_id, liquid)
-                print(f"    ✓ {section_id}")
+                block_count = len(template_data.get("blocks", {}))
+                setting_count = len(template_data.get("settings", {}))
+                print(f"    ✓ {section_id} ({setting_count} settings, {block_count} blocks)")
             except Exception as e:
                 print(f"    ✗ {sid}: {e}")
                 failed.append(sid)
 
     state.write_sections_draft(sections_draft)
+    state.write_sections_template_data(template_data_all)
 
     if failed:
         print(f"  ⚠ {len(failed)} section(s) failed conversion: {failed}")

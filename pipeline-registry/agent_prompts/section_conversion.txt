@@ -44,9 +44,11 @@ You will receive:
 
 ## OUTPUT FORMAT
 
-Output ONLY the complete contents of the .liquid file. No prose. No markdown fences. No explanation. The file starts with a comment block and ends with {% endschema %}.
+Your output has TWO parts separated by a `===TEMPLATE_DATA===` marker:
 
-File structure:
+**Part 1:** The complete .liquid file (starts with comment block, ends with `{% endschema %}`).
+**Part 2:** A JSON object containing the exact cloned content for `templates/product.json`.
+
 ```
 {%- comment -%}
   Section: [section_id]
@@ -55,8 +57,6 @@ File structure:
   Dawn version: 15.0
 {%- endcomment -%}
 
-{{ '[section-name].css' | asset_url | stylesheet_tag }}
-
 [Liquid markup]
 
 {% style %}
@@ -64,6 +64,7 @@ File structure:
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
+  [All other section CSS goes here, scoped to .section-{{ section.id }}]
 {% endstyle %}
 
 [Optional: <script> block with Web Component if interactive behavior required]
@@ -71,11 +72,38 @@ File structure:
 {% schema %}
 [JSON schema]
 {% endschema %}
+===TEMPLATE_DATA===
+{
+  "settings": {
+    "setting_id_1": "exact cloned value from competitor page",
+    "setting_id_2": "another cloned value",
+    "padding_top": 36,
+    "padding_bottom": 36
+  },
+  "blocks": {
+    "block_1": { "type": "block_type", "settings": { "heading": "Exact FAQ question from page", "content": "Exact answer text" } },
+    "block_2": { "type": "block_type", "settings": { "heading": "Second question", "content": "Second answer" } }
+  },
+  "block_order": ["block_1", "block_2"]
+}
 ```
+
+### TEMPLATE_DATA RULES
+
+The template_data JSON is what goes into `templates/product.json` to populate the section with real content. Without it, the section renders with only schema defaults.
+
+1. **Settings:** Include EVERY setting that has a cloned value. Use the exact setting IDs from your schema. Copy the EXACT text/content from the competitor page — do not paraphrase or summarize.
+2. **Blocks:** Include EVERY block instance with real content. Each block key must be a unique slug (e.g., "faq_1", "faq_2", "badge_1"). Include the block `type` and all `settings` with cloned values.
+3. **block_order:** Array of block keys in display order.
+4. **Product data settings:** Do NOT include settings whose values come from Liquid objects (product.title, product.price, etc.) — those are dynamic. Only include static/marketing content.
+5. **Images:** For image_picker settings, set the value to `""` (empty) — merchants must upload their own images via Theme Editor. Add a comment in the .liquid file noting which images need uploading.
+6. If a section has NO blocks and only dynamic product data (e.g., product_gallery), the blocks object should be `{}` and block_order should be `[]`.
 
 ---
 
 ## CONTENT MAPPING RULES
+
+CRITICAL: You are cloning this page. Every piece of visible text, every heading, every bullet point, every FAQ question and answer, every testimonial, every badge label — must be captured EXACTLY as it appears on the competitor page. Do not paraphrase, summarize, or use placeholder text. The goal is that the cloned page reads identically to the original.
 
 Before writing any Liquid markup, mentally map every content element:
 
@@ -174,7 +202,7 @@ Every schema MUST have:
 
 Settings must be ordered: Content → Layout → Colors → Padding
 Settings must use t: locale key labels where Dawn locale keys exist
-Settings must have sensible default values — no blank defaults for visible content
+Settings must have the EXACT cloned content as default values — copy competitor text verbatim, never use generic placeholders
 
 REQUIRED PADDING SETTINGS in every section schema:
 ```json
@@ -208,15 +236,18 @@ COLOR SCHEME setting for sections with background:
 
 ## CSS RULES
 
-1. Scope to `.section-{{ section.id }}` — all rules inside this scope
-2. No inline styles except: `--css-variable` assignments and `padding` via `{% style %}` block
-3. Use Dawn CSS variables for colors: `var(--color-foreground)`, `var(--color-background)`, `var(--color-accent)`
-4. Use Dawn CSS variables for fonts: `var(--font-body-family)`, `var(--font-heading-family)`
-5. Use Dawn grid classes for layout: `.grid`, `.grid--2-col-tablet`, `.grid--3-col-desktop`
-6. Use Dawn button classes: `.button`, `.button--primary`, `.button--secondary`
-7. Use Dawn page-width class for container: `.page-width`
-8. Mobile-first: start with mobile styles, add `@media (min-width: 750px)` for tablet, `@media (min-width: 990px)` for desktop
-9. Wrap all animations in `@media (prefers-reduced-motion: no-preference)`
+CRITICAL: Do NOT use `asset_url | stylesheet_tag` to load external CSS files. The pipeline does not create CSS asset files. All CSS must live inside the `{% style %}` block in the same file.
+
+1. ALL CSS goes inside a single `{% style %}{% endstyle %}` block at the bottom of the file, before `{% schema %}`
+2. Scope every rule to `.section-{{ section.id }}` — no exceptions
+3. No inline styles except: `--css-variable` assignments
+4. Use Dawn CSS variables for colors: `var(--color-foreground)`, `var(--color-background)`, `var(--color-accent)`
+5. Use Dawn CSS variables for fonts: `var(--font-body-family)`, `var(--font-heading-family)`
+6. Use Dawn grid classes for layout: `.grid`, `.grid--2-col-tablet`, `.grid--3-col-desktop`
+7. Use Dawn button classes: `.button`, `.button--primary`, `.button--secondary`
+8. Use Dawn page-width class for container: `.page-width`
+9. Mobile-first: start with mobile styles, add `@media (min-width: 750px)` for tablet, `@media (min-width: 990px)` for desktop
+10. Wrap all animations in `@media (prefers-reduced-motion: no-preference)`
 
 ---
 
@@ -278,6 +309,8 @@ Output is invalid if it contains ANY of:
 - jQuery, lodash, or any external JS library
 - Inline `style="color: #xxx"` that is not a CSS variable assignment
 - Schema labels that are hardcoded English strings (not t: keys) unless the key doesn't exist in Dawn's locale files
+- `asset_url | stylesheet_tag` for section-specific CSS (use `{% style %}` block instead)
+- An empty output — if conversion cannot be done cleanly, output a minimal valid section with a schema and a visible placeholder message instead
 
 If you detect any of these in your output before finalizing — fix them.
 

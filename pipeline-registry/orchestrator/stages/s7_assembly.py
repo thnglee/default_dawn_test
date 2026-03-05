@@ -1,10 +1,10 @@
 """
 Stage 7 — Assembly
 1. Copies final .liquid files to repo sections/
-2. Builds templates/product.json wiring all native sections
+2. Overwrites templates/product.json with pipeline sections only (replaces Dawn default)
 3. Runs `shopify theme check` for syntax validation
 
-Outputs: sections written to repo, templates/product.json updated
+Outputs: sections written to repo, templates/product.json fully replaced
 """
 
 import json
@@ -16,15 +16,14 @@ from config import SECTIONS_OUT, TEMPLATES_OUT
 from state import RunState
 
 
-_PRODUCT_TEMPLATE_SKELETON = {
-    "sections": {},
-    "order": [],
-}
-
-
-def _build_product_template(section_ids: list[str], section_map_sections: list[dict]) -> dict:
+def _build_product_template(
+    section_ids: list[str],
+    section_map_sections: list[dict],
+    template_data_all: dict[str, dict],
+) -> dict:
     """
-    Build a templates/product.json that loads all native sections in layout order.
+    Build a templates/product.json with all sections populated with cloned content.
+    template_data_all: {section_id: {settings, blocks, block_order}} from Stage 5.
     """
     template = {
         "sections": {},
@@ -35,11 +34,13 @@ def _build_product_template(section_ids: list[str], section_map_sections: list[d
         sid = section.get("section_id")
         if sid not in section_ids:
             continue
+
+        td = template_data_all.get(sid, {})
         template["sections"][sid] = {
             "type": sid,
-            "settings": {},
-            "blocks": {},
-            "block_order": [],
+            "settings": td.get("settings", {}),
+            "blocks": td.get("blocks", {}),
+            "block_order": td.get("block_order", []),
         }
         template["order"].append(sid)
 
@@ -68,20 +69,19 @@ def run(state: RunState) -> dict:
         written_sections.append(liq_path.stem)
         print(f"    → sections/{liq_path.name}")
 
-    # Build product template
-    template_data = _build_product_template(written_sections, sections)
+    # Load cloned content data from Stage 5
+    try:
+        template_data_all = state.read_sections_template_data()
+    except FileNotFoundError:
+        print("    ⚠ No sections_template_data.json found — using empty settings/blocks")
+        template_data_all = {}
+
+    # Build product template — full override (Dawn default sections are replaced)
+    template_data = _build_product_template(written_sections, sections, template_data_all)
     template_path = TEMPLATES_OUT / "product.json"
 
-    # Merge with existing template if present (preserve header/footer/seo sections)
     if template_path.exists():
-        existing = json.loads(template_path.read_text(encoding="utf-8"))
-        # Keep existing sections that are not being replaced
-        for sid, sdata in existing.get("sections", {}).items():
-            if sid not in template_data["sections"]:
-                template_data["sections"][sid] = sdata
-                # Insert at beginning (header/nav usually comes first)
-                if sid not in template_data["order"]:
-                    template_data["order"].insert(0, sid)
+        print(f"    ⚠ Overwriting existing templates/product.json (Dawn default)")
 
     template_path.write_text(
         json.dumps(template_data, indent=2, ensure_ascii=False),
