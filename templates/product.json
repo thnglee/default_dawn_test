@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -234,10 +225,19 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "apps_section": {
+      "type": "apps",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
+    "apps_section",
     "related-products",
     "why_nothing_worked_98nfpK",
     "trust_badges_bar_icBfwj"
