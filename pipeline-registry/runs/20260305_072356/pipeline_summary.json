@@ -4,34 +4,34 @@
     {
       "section_id": "product-hero",
       "section_type": "product_gallery",
-      "compliance_score": 0.0,
-      "compliance_passes": 2,
-      "escalated": true,
+      "compliance_score": null,
+      "compliance_passes": null,
+      "escalated": false,
       "regression_decision": "—",
-      "ok": false
+      "ok": true
     },
     {
       "section_id": "product-info",
       "section_type": "product_info",
-      "compliance_score": 0.0,
-      "compliance_passes": 2,
-      "escalated": true,
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
       "regression_decision": "—",
-      "ok": false
+      "ok": true
     },
     {
       "section_id": "pricing-section",
       "section_type": "product_info",
-      "compliance_score": 0.0,
-      "compliance_passes": 2,
-      "escalated": true,
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
       "regression_decision": "—",
-      "ok": false
+      "ok": true
     },
     {
       "section_id": "benefits-details",
       "section_type": "description",
-      "compliance_score": 0.95,
+      "compliance_score": 1.0,
       "compliance_passes": 1,
       "escalated": false,
       "regression_decision": "—",
@@ -40,7 +40,7 @@
     {
       "section_id": "how-it-works",
       "section_type": "description",
-      "compliance_score": 0.95,
+      "compliance_score": 1.0,
       "compliance_passes": 1,
       "escalated": false,
       "regression_decision": "—",
@@ -49,7 +49,7 @@
     {
       "section_id": "ingredient-section",
       "section_type": "description",
-      "compliance_score": 0.95,
+      "compliance_score": 1.0,
       "compliance_passes": 1,
       "escalated": false,
       "regression_decision": "—",
@@ -58,22 +58,22 @@
     {
       "section_id": "reviews-section",
       "section_type": "reviews",
-      "compliance_score": 0.0,
-      "compliance_passes": 2,
-      "escalated": true,
+      "compliance_score": 1.0,
+      "compliance_passes": 1,
+      "escalated": false,
       "regression_decision": "—",
-      "ok": false
+      "ok": true
     },
     {
       "section_id": "testimonial-section",
       "section_type": "testimonials",
-      "compliance_score": 0.0,
-      "compliance_passes": 2,
-      "escalated": true,
+      "compliance_score": null,
+      "compliance_passes": null,
+      "escalated": false,
       "regression_decision": "—",
-      "ok": false
+      "ok": true
     }
   ],
   "total": 8,
-  "ok": 3
+  "ok": 8
 }

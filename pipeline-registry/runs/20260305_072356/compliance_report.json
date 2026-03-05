@@ -1,133 +1,44 @@
 {
   "benefits-details": {
-    "final_score": 0.95,
+    "final_score": 1.0,
     "passes_run": 1,
     "escalated": false,
-    "violations_found": [
-      {
-        "rule": "DC-13",
-        "description": "Schema setting labels and info fields use hardcoded English strings instead of t: translation keys. Affected fields: header 'App Setup', header 'Spacing', labels for placeholder_visible, placeholder_label, merchant_instruction, app_store_url, and their info strings.",
-        "location": "schema settings",
-        "severity": "warning",
-        "auto_fixed": false,
-        "fix_applied": null
-      }
-    ],
-    "unresolvable_flags": [
-      {
-        "rule": "DC-13",
-        "description": "Multiple schema labels and info fields are hardcoded English strings (e.g. 'Show placeholder in Theme Editor', 'Section label', 'Setup instructions', 'App Store URL', 'App Setup', 'Spacing'). These are custom app-placeholder settings with no existing Dawn locale keys.",
-        "manual_action": "Create corresponding translation keys in locales/en.default.schema.json under a new 'sections.app_placeholder' namespace (e.g. t:sections.app_placeholder.placeholder_visible.label) and replace the hardcoded strings in the schema with those t: keys."
-      }
-    ]
+    "violations_found": [],
+    "unresolvable_flags": []
   },
   "how-it-works": {
-    "final_score": 0.95,
+    "final_score": 1.0,
     "passes_run": 1,
     "escalated": false,
-    "violations_found": [
-      {
-        "rule": "DC-13",
-        "description": "Schema labels for custom app-placeholder settings use hardcoded English strings instead of t: locale keys. Affected settings: header \"App Setup\", placeholder_visible label, placeholder_label label, merchant_instruction label, app_store_url label, header \"Spacing\".",
-        "location": "schema settings",
-        "severity": "warning",
-        "auto_fixed": false,
-        "fix_applied": null
-      }
-    ],
-    "unresolvable_flags": [
-      {
-        "rule": "DC-13",
-        "description": "Schema labels for app-placeholder-specific settings (placeholder_visible, placeholder_label, merchant_instruction, app_store_url, and header content strings \"App Setup\" / \"Spacing\") are hardcoded English. No existing Dawn t: locale keys map to these custom labels.",
-        "manual_action": "Create new locale keys in locales/en.default.schema.json under a 'sections.app_placeholder' namespace (e.g. t:sections.app_placeholder.placeholder_visible_label) and replace each hardcoded label/content/info string with the corresponding t: key."
-      }
-    ]
+    "violations_found": [],
+    "unresolvable_flags": []
   },
   "ingredient-section": {
-    "final_score": 0.95,
+    "final_score": 1.0,
     "passes_run": 1,
     "escalated": false,
-    "violations_found": [
-      {
-        "rule": "DC-13",
-        "description": "Schema labels and info fields use hardcoded English strings instead of t: translation keys. Affected fields: header content \"App Setup\", checkbox label \"Show placeholder in Theme Editor\", checkbox info, text label \"Section label\", text info, textarea label \"Setup instructions\", url label \"App Store URL\", url info, header content \"Spacing\".",
-        "location": "schema settings",
-        "severity": "warning",
-        "auto_fixed": false,
-        "fix_applied": null
-      }
-    ],
-    "unresolvable_flags": [
-      {
-        "rule": "DC-13",
-        "description": "9 schema label/info/content fields use hardcoded English strings. These are all custom app-placeholder settings with no corresponding Dawn locale keys in en.default.schema.json.",
-        "manual_action": "Create new translation keys in locales/en.default.schema.json under a 'sections.app_placeholder' namespace (e.g. t:sections.app_placeholder.header_app_setup, t:sections.app_placeholder.placeholder_visible.label, etc.) and replace the hardcoded strings in the schema with those keys."
-      }
-    ]
-  },
-  "product-hero": {
-    "final_score": 0.0,
-    "passes_run": 2,
-    "escalated": true,
     "violations_found": [],
-    "unresolvable_flags": [
-      {
-        "rule": "PIPELINE",
-        "description": "No valid Liquid content received. The input `liquid_content` is an error message ('Error: Reached max turns (1)'), not a .liquid section file. The upstream Section Conversion Agent failed to produce output within its turn limit.",
-        "manual_action": "Re-run the Section Conversion Agent for section 'product-hero' with a higher turn budget or simplified input, then resubmit the resulting .liquid file to the Dawn Compliance Agent as pass 1."
-      }
-    ]
-  },
-  "product-info": {
-    "final_score": 0.0,
-    "passes_run": 2,
-    "escalated": true,
-    "violations_found": [],
-    "unresolvable_flags": [
-      {
-        "rule": "PIPELINE",
-        "description": "No valid Liquid content received. The upstream Section Conversion Agent returned an error: 'Reached max turns (1)'. The liquid_content field contains an error message instead of a .liquid section file.",
-        "manual_action": "Re-run the Section Conversion Agent for section 'product-info' with an increased turn limit or simplified input. Once valid Liquid output is produced, re-submit to the Dawn Compliance Agent for pass 1."
-      }
-    ]
-  },
-  "reviews-section": {
-    "final_score": 0.0,
-    "passes_run": 2,
-    "escalated": true,
-    "violations_found": [],
-    "unresolvable_flags": [
-      {
-        "rule": "PIPELINE",
-        "description": "No valid Liquid content received. Pass 2 input contains an upstream pipeline error: 'Error: Reached max turns (1)'. The Section Conversion Agent failed to produce a .liquid file for this section.",
-        "manual_action": "Re-run the Section Conversion Agent for 'reviews-section' with a higher turn limit or simplified input, then resubmit the generated .liquid file to the Dawn Compliance Agent as pass 1."
-      }
-    ]
+    "unresolvable_flags": []
   },
   "pricing-section": {
-    "final_score": 0.0,
-    "passes_run": 2,
-    "escalated": true,
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
     "violations_found": [],
-    "unresolvable_flags": [
-      {
-        "rule": "PIPELINE",
-        "description": "No valid Liquid content received. The upstream Section Conversion Agent returned an error: \"Reached max turns (1)\". There is no .liquid file to review or patch.",
-        "manual_action": "Re-run the Section Conversion Agent for 'pricing-section' with a higher turn limit or simplified input, then resubmit the output to the Dawn Compliance Agent."
-      }
-    ]
+    "unresolvable_flags": []
   },
-  "testimonial-section": {
-    "final_score": 0.0,
-    "passes_run": 2,
-    "escalated": true,
+  "reviews-section": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
     "violations_found": [],
-    "unresolvable_flags": [
-      {
-        "rule": "PIPELINE",
-        "description": "No valid Liquid content received. The upstream Section Conversion Agent returned an error: \"Reached max turns (1)\". The input contains no .liquid section file to review.",
-        "manual_action": "Re-run the Section Conversion Agent (Stage 5) for section 'testimonial-section' with a higher turn limit or simplified input. Once valid Liquid content is produced, re-submit to the Dawn Compliance Agent for review."
-      }
-    ]
+    "unresolvable_flags": []
+  },
+  "product-info": {
+    "final_score": 1.0,
+    "passes_run": 1,
+    "escalated": false,
+    "violations_found": [],
+    "unresolvable_flags": []
   }
 }

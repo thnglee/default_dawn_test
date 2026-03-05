@@ -14,13 +14,15 @@
     "blocks": {},
     "block_order": []
   },
-  "product-hero": {
-    "settings": {},
-    "blocks": {},
-    "block_order": []
-  },
-  "product-info": {
-    "settings": {},
+  "pricing-section": {
+    "settings": {
+      "logo_image": "",
+      "logo_alt": "Brand logo",
+      "logo_max_width": 160,
+      "color_scheme": "scheme-1",
+      "padding_top": 12,
+      "padding_bottom": 12
+    },
     "blocks": {},
     "block_order": []
   },
@@ -29,14 +31,43 @@
     "blocks": {},
     "block_order": []
   },
-  "pricing-section": {
-    "settings": {},
-    "blocks": {},
-    "block_order": []
-  },
-  "testimonial-section": {
-    "settings": {},
-    "blocks": {},
-    "block_order": []
+  "product-info": {
+    "settings": {
+      "badge_text": "Clinicians' Choice",
+      "badge_image": "",
+      "show_vendor": true,
+      "join_statement": "Join 50,000+ happy customers",
+      "color_scheme": "scheme-1",
+      "padding_top": 36,
+      "padding_bottom": 36
+    },
+    "blocks": {
+      "benefit_1": {
+        "type": "benefit_item",
+        "settings": {
+          "text": "Clinicians' Choice",
+          "icon": ""
+        }
+      },
+      "benefit_2": {
+        "type": "benefit_item",
+        "settings": {
+          "text": "Free shipping on orders over $50",
+          "icon": ""
+        }
+      },
+      "benefit_3": {
+        "type": "benefit_item",
+        "settings": {
+          "text": "30-day money back guarantee",
+          "icon": ""
+        }
+      }
+    },
+    "block_order": [
+      "benefit_1",
+      "benefit_2",
+      "benefit_3"
+    ]
   }
 }
