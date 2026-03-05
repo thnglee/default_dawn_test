@@ -1,20 +1,245 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
-      "type": "product",
-      "settings": {}
+      "type": "main-product",
+      "blocks": {
+        "collapsible_tab_EehAP7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_mark",
+            "content": "<p>sản phẩm này là thuốc</p>",
+            "page": ""
+          }
+        },
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "icon_with_text_Xitcxh": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "heart",
+            "heading_1": "Heading",
+            "icon_2": "return",
+            "heading_2": "Heading",
+            "icon_3": "truck",
+            "heading_3": "Heading"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab_EehAP7",
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "icon_with_text_Xitcxh",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "apps_section": {
+      "type": "apps",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "why_nothing_worked_98nfpK": {
+      "type": "why-nothing-worked",
+      "blocks": {
+        "failure_card_aWFfnj": {
+          "type": "failure_card",
+          "settings": {
+            "image": "shopify://shop_images/imgi_19_LymphDrainageREWAMPEDvisualsArtboard11_5aeb71c6-e5f4-43ce-8926-c2cdecdb214d.jpg",
+            "show_crossout": true,
+            "heading": "Diet & Exercise Alone",
+            "reason": "<p>Calorie restriction and workouts only address surface-level symptoms without targeting the underlying lymphatic congestion.</p>"
+          }
+        },
+        "failure_card_NCyD4J": {
+          "type": "failure_card",
+          "settings": {
+            "image": "shopify://shop_images/imgi_16_LymphDrainageREWAMPEDvisualsArtboard8_7fd22649-8e8a-4ce4-8f56-6f4ae69f01ba.jpg",
+            "show_crossout": true,
+            "heading": "Viral Lymphatic Drops",
+            "reason": "<p>Low-dose herbal tinctures lack the potency and bioavailability needed to make a real difference in lymph flow.</p>"
+          }
+        },
+        "failure_card_67QGF7": {
+          "type": "failure_card",
+          "settings": {
+            "image": "shopify://shop_images/imgi_15_LymphDrainageREWAMPEDvisualsArtboard6_ffe821de-bc1f-47f9-99c0-e5e925de1036.jpg",
+            "show_crossout": true,
+            "heading": "Massage & Compression Socks",
+            "reason": "<p>External compression provides temporary relief but cannot address internal lymphatic stagnation at its source.</p>"
+          }
+        },
+        "callout_8znJKy": {
+          "type": "callout",
+          "settings": {
+            "heading": "The Missing Piece",
+            "content": "<p>True lymphatic support requires targeted internal drainage — the one thing none of these solutions provide.</p>"
+          }
+        },
+        "guarantee_badge_GGBjaL": {
+          "type": "guarantee_badge",
+          "settings": {
+            "text": "60-Day Money-Back Guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "failure_card_aWFfnj",
+        "failure_card_NCyD4J",
+        "failure_card_67QGF7",
+        "callout_8znJKy",
+        "guarantee_badge_GGBjaL"
+      ],
+      "name": "Why Nothing Worked",
+      "settings": {
+        "heading": "Why Nothing Has Worked",
+        "subheading": "<p>You've tried everything. Here's why those solutions fell short.</p>",
+        "heading_size": "h2",
+        "button_label": "Try Lymphatic Drainage Risk-Free",
+        "button_url": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "trust_badges_bar_icBfwj": {
+      "type": "trust-badges-bar",
+      "blocks": {
+        "badge_item_tTyfze": {
+          "type": "badge_item",
+          "settings": {
+            "icon": "shipping",
+            "heading": "Free USA Shipping",
+            "subtext": ""
+          }
+        },
+        "badge_item_R9EHD8": {
+          "type": "badge_item",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Naturally Supports Your Body",
+            "subtext": ""
+          }
+        },
+        "badge_item_kAb63w": {
+          "type": "badge_item",
+          "settings": {
+            "icon": "ingredients",
+            "heading": "100% Natural Ingredients",
+            "subtext": ""
+          }
+        },
+        "badge_item_BzWYCV": {
+          "type": "badge_item",
+          "settings": {
+            "icon": "guarantee",
+            "heading": "Try It Risk Free for 60 Days",
+            "subtext": ""
+          }
+        }
+      },
+      "block_order": [
+        "badge_item_tTyfze",
+        "badge_item_R9EHD8",
+        "badge_item_kAb63w",
+        "badge_item_BzWYCV"
+      ],
+      "name": "Trust Badges Bar",
+      "settings": {
+        "color_scheme": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "apps_section",
+    "related-products",
+    "why_nothing_worked_98nfpK",
+    "trust_badges_bar_icBfwj"
   ]
 }
